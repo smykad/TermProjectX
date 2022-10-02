@@ -1,4 +1,35 @@
 ﻿body {
     padding: 1em;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-bottom: 60px;
+    background-image: url("/Images/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+main {
+    background-color: black;
+    padding: 20px;
+    border-radius: 20px;
+    
+    
+    border-radius: 20px;
+    opacity: .75;
+    border-color: gold;
+    border-style: solid;
+}
+
+.overide-main {
+    background-color:none;
+    border:none;
+    padding:0px;
+}
+
+
+.text-blue {
+    color: #7289da;
+}
+
+h1, h2, h3, h4, p, label {
+    color: #ffffff;
 }
