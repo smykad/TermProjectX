@@ -21,7 +21,7 @@ namespace TermProjectX.Controllers
         // GET: SCP
         public async Task<IActionResult> Index()
         {
-            var sCPContext = _context.SCPs.Include(s => s.ObjectClass);
+            var sCPContext = _context.SCPs.Include(s => s.ObjectClass).Include(s => s.ThreatLevel);
             return View(await sCPContext.ToListAsync());
         }
 
@@ -35,6 +35,7 @@ namespace TermProjectX.Controllers
 
             var sCP = await _context.SCPs
                 .Include(s => s.ObjectClass)
+                .Include(s => s.ThreatLevel)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (sCP == null)
             {
@@ -48,6 +49,7 @@ namespace TermProjectX.Controllers
         public IActionResult Create()
         {
             ViewData["ObjectClassID"] = new SelectList(_context.ObjectClasses, "ObjectClassId", "ObjectClassId");
+            ViewData["ThreatLevelID"] = new SelectList(_context.ThreatLevels, "ThreatLevelId", "ThreatLevelId");
             return View();
         }
 
@@ -56,7 +58,7 @@ namespace TermProjectX.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Description,Containment,ObjectClassID")] SCP sCP)
+        public async Task<IActionResult> Create([Bind("ID,Name,Description,Containment,ObjectClassID,ThreatLevelID")] SCP sCP)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +67,7 @@ namespace TermProjectX.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ObjectClassID"] = new SelectList(_context.ObjectClasses, "ObjectClassId", "ObjectClassId", sCP.ObjectClassID);
+            ViewData["ThreatLevelID"] = new SelectList(_context.ThreatLevels, "ThreatLevelId", "ThreatLevelId", sCP.ThreatLevelID);
             return View(sCP);
         }
 
@@ -82,6 +85,7 @@ namespace TermProjectX.Controllers
                 return NotFound();
             }
             ViewData["ObjectClassID"] = new SelectList(_context.ObjectClasses, "ObjectClassId", "ObjectClassId", sCP.ObjectClassID);
+            ViewData["ThreatLevelID"] = new SelectList(_context.ThreatLevels, "ThreatLevelId", "ThreatLevelId", sCP.ThreatLevelID);
             return View(sCP);
         }
 
@@ -90,7 +94,7 @@ namespace TermProjectX.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Description,Containment,ObjectClassID")] SCP sCP)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Description,Containment,ObjectClassID,ThreatLevelID")] SCP sCP)
         {
             if (id != sCP.ID)
             {
@@ -118,6 +122,7 @@ namespace TermProjectX.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ObjectClassID"] = new SelectList(_context.ObjectClasses, "ObjectClassId", "ObjectClassId", sCP.ObjectClassID);
+            ViewData["ThreatLevelID"] = new SelectList(_context.ThreatLevels, "ThreatLevelId", "ThreatLevelId", sCP.ThreatLevelID);
             return View(sCP);
         }
 
@@ -131,6 +136,7 @@ namespace TermProjectX.Controllers
 
             var sCP = await _context.SCPs
                 .Include(s => s.ObjectClass)
+                .Include(s => s.ThreatLevel)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (sCP == null)
             {

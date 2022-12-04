@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table text-white">
+<table class="table">
     <thead>
         <tr>
             <th>
@@ -21,8 +21,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.Containment)
             </th>
-            <th class="text-nowrap">
-                Object Class
+            <th>
+                @Html.DisplayNameFor(model => model.ObjectClass)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThreatLevel)
             </th>
             <th></th>
         </tr>
@@ -41,6 +44,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ObjectClass.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThreatLevel.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

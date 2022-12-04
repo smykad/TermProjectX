@@ -28,6 +28,11 @@ namespace TermProjectX.Models
 
         [Display(Name="Object Class")]
         public ObjectClass ObjectClass { get; set; }
+        [ForeignKey("ThreatLevelID")]
+        public string ThreatLevelID { get; set; }
+
+        [Display(Name = "Threat Level")]
+        public ThreatLevel ThreatLevel { get; set; }
 
     }
 }
