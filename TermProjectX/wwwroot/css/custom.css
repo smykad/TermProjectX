@@ -30,7 +30,7 @@ main {
     color: #7289da;
 }
 
-h1, h2, h3, h4, p, label, span, th, td, table, thead {
+h1, h2, h3, h4, p, label, span, th, td, table, thead, dd, dt, dl, body {
     color: #ffffff;
 }
 
