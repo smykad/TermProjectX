@@ -3,13 +3,21 @@
 @{
     ViewData["Title"] = "Create";
 }
+<h1 class="text-center">@Html.DisplayNameFor(model => model): Create</h1>
 
-<h1>Create</h1>
 
-<h4>ThreatLevel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<br />
+<br />
+<div class="card-deck justify-content-center">
+@*CARD*@
+<div class="card" style="max-width: 18rem;">
+
+    @*CARD HEADER*@
+    <div class="card-header bg-info">
+            Add @Html.DisplayNameFor(model => model)
+    </div>
+    @*CARD BODY*@
+    <div class="card-body bg-dark">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -19,13 +27,11 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-success">Cancel</a>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

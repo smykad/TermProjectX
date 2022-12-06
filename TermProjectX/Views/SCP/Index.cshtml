@@ -5,83 +5,36 @@
 }
 
 <h1>Secure. Contain. Protect.</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
-        <p>
+        <div class="row">
+            <div class="col-md-4">
             Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]"/>
             <input type="submit" value="Search" class="btn btn-default" />
-            <a asp-action="Index">Back to Full List</a> | 
-            <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">Sort by Name</a>
-        </p>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="btn-group-md justify-content-end col-md-6">
+            <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" class="btn btn-primary">Sort by Name</a>
+            
+            <a asp-action="Index" class="btn btn-success">Back to Full List</a>
+            </div>
+        </div>
     </div>
 </form>
-@*<table class="table">
-    <thead>
-        <tr>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">Name</a>
-            </th>
-            <th>
-                @Html.DisplayName("Containment")
-            </th>
-            <th>
-                @Html.DisplayName("Object Class")
-            </th>
-            <th>
-                @Html.DisplayName("Threat Level")
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Containment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ObjectClass.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThreatLevel.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>*@
 
-<div class="card-deck">
+<div class="card-deck justify-content-center">
 @foreach (var item in Model) {
-        <div class="card h-100 text-center" style="min-width: 300px; max-width: 400px;">
-       <div class="card-body">
-                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5><br/>
-                <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayName("Threat Level: ")@Html.DisplayFor(modelItem => item.ThreatLevel.Name)</h6><br/>
-                <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayName("Object Class: ") @Html.DisplayFor(modelItem => item.ObjectClass.Name)</h6><br/>
-                <h6 class="card-subtitle mb-3 text-muted">@Html.DisplayName("Description")</h6>
-            <p class="card-text mb-2 text-muted">@Html.DisplayFor(modelItem => item.Description)</p><br/>
-                <h6 class="card-subtitle mb-3 text-muted">@Html.DisplayName("Containment")</h6>
-            <p class="card-text mb-2 text-muted">@Html.DisplayFor(modelItem => item.Containment)</p>
-        
+        <div class="card h-100 bg-info text-center" style="max-width: 18rem;">
+            <div class="card-header bg-info">
+                <a asp-action="Details" asp-route-id="@item.ID" class="text-white"><h5>@Html.DisplayFor(modelItem => item.Name)</h5></a>
+            </div>
+       <div class="card-body bg-dark">
+                <h6 class="card-subtitle ">@Html.DisplayName("Threat Level: ")@Html.DisplayFor(modelItem => item.ThreatLevel.Name)</h6><br/>
+                <h6 class="card-subtitle ">@Html.DisplayName("Object Class: ") @Html.DisplayFor(modelItem => item.ObjectClass.Name)</h6><br/>      
             <div class="card-footer mt-auto">
                     <small>
-                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-primary">Edit</a> 
+                        <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger">Delete</a>
                     </small>
             </div>
       </div>
@@ -102,18 +55,22 @@
    asp-route-sortOrder="@ViewData["CurrentSort"]"
    asp-route-pageNumber="@(Model.PageIndex - 1)"
    asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="page-link @prevDisabled">
+   class="page-link text-white bg-primary @prevDisabled">
     Previous
 </a>
 </li>
+        <li class="page-item">
+            <a asp-action="Create" class="page-link text-white bg-primary">Create New</a>
+        </li>
 <li class="page-item">
 <a asp-action="Index"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
    asp-route-pageNumber="@(Model.PageIndex + 1)"
    asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="page-link @nextDisabled">
+               class="page-link text-white bg-primary @nextDisabled">
     Next
 </a>
 </li>
+
 </ul>
 </div>

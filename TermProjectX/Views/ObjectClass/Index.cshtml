@@ -4,32 +4,46 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ObjectClassId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ObjectClassId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ObjectClassId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<h1 class="text-center text-white">Object Class</h1>
+
+
+<br />
+<br />
+
+
+@*CARD DECK*@
+<div class="card-deck justify-content-center">
+    @foreach (var item in Model)
+    {
+
+        @*CARD*@
+        <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+
+            @*CARD HEADER*@
+            <div class="card-header text-center">@Html.DisplayFor(modelItem => item.Name)</div>
+
+            @*CARD BODY*@
+            <div class="card-body bg-dark">
+
+                @*CARD BUTTONS*@
+                <div class="form-group justify-content-center">
+                    <a asp-action="Edit" asp-route-id="@item.ObjectClassId" class="btn btn-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.ObjectClassId" class="btn btn-primary">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.ObjectClassId" class="btn btn-primary">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<br />
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </div>
+    </div>
+</div>
