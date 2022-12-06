@@ -19,11 +19,51 @@ namespace TermProjectX.Controllers
         }
 
         // GET: SCP
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    var sCPContext = _context.SCPs.Include(s => s.ObjectClass).Include(s => s.ThreatLevel);
+        //    return View(await sCPContext.ToListAsync());
+        //}
+
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
-            var sCPContext = _context.SCPs.Include(s => s.ObjectClass).Include(s => s.ThreatLevel);
-            return View(await sCPContext.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+
+            var scps = from s in _context.SCPs.Include(s => s.ObjectClass).Include(s => s.ThreatLevel)
+            select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                scps = scps.Where(s => s.Name.Contains(searchString)
+                                        || s.Name.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    scps = scps.OrderByDescending(s => s.Name);
+                    break;
+                default:
+                    scps = scps.OrderBy(s => s.Name);
+                    break;
+            }
+            int pageSize = 3;
+            return View(await PaginatedList<SCP>.CreateAsync(scps.AsNoTracking(), pageNumber ?? 1, pageSize));
+
         }
+
 
         // GET: SCP/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -48,8 +88,8 @@ namespace TermProjectX.Controllers
         // GET: SCP/Create
         public IActionResult Create()
         {
-            ViewData["ObjectClassID"] = new SelectList(_context.ObjectClasses, "ObjectClassId", "ObjectClassId");
-            ViewData["ThreatLevelID"] = new SelectList(_context.ThreatLevels, "ThreatLevelId", "ThreatLevelId");
+            ViewData["ObjectClassID"] = new SelectList(_context.ObjectClasses, "ObjectClassId", "Name");
+            ViewData["ThreatLevelID"] = new SelectList(_context.ThreatLevels, "ThreatLevelId", "Name");
             return View();
         }
 
@@ -66,8 +106,8 @@ namespace TermProjectX.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ObjectClassID"] = new SelectList(_context.ObjectClasses, "ObjectClassId", "ObjectClassId", sCP.ObjectClassID);
-            ViewData["ThreatLevelID"] = new SelectList(_context.ThreatLevels, "ThreatLevelId", "ThreatLevelId", sCP.ThreatLevelID);
+            ViewData["ObjectClassID"] = new SelectList(_context.ObjectClasses, "ObjectClassId", "Name", sCP.ObjectClassID);
+            ViewData["ThreatLevelID"] = new SelectList(_context.ThreatLevels, "ThreatLevelId", "Name", sCP.ThreatLevelID);
             return View(sCP);
         }
 
@@ -84,8 +124,8 @@ namespace TermProjectX.Controllers
             {
                 return NotFound();
             }
-            ViewData["ObjectClassID"] = new SelectList(_context.ObjectClasses, "ObjectClassId", "ObjectClassId", sCP.ObjectClassID);
-            ViewData["ThreatLevelID"] = new SelectList(_context.ThreatLevels, "ThreatLevelId", "ThreatLevelId", sCP.ThreatLevelID);
+            ViewData["ObjectClassID"] = new SelectList(_context.ObjectClasses, "ObjectClassId", "Name", sCP.ObjectClassID);
+            ViewData["ThreatLevelID"] = new SelectList(_context.ThreatLevels, "ThreatLevelId", "Name", sCP.ThreatLevelID);
             return View(sCP);
         }
 
@@ -121,8 +161,8 @@ namespace TermProjectX.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ObjectClassID"] = new SelectList(_context.ObjectClasses, "ObjectClassId", "ObjectClassId", sCP.ObjectClassID);
-            ViewData["ThreatLevelID"] = new SelectList(_context.ThreatLevels, "ThreatLevelId", "ThreatLevelId", sCP.ThreatLevelID);
+            ViewData["ObjectClassID"] = new SelectList(_context.ObjectClasses, "ObjectClassId", "Name", sCP.ObjectClassID);
+            ViewData["ThreatLevelID"] = new SelectList(_context.ThreatLevels, "ThreatLevelId", "Name", sCP.ThreatLevelID);
             return View(sCP);
         }
 

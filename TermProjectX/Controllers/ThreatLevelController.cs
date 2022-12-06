@@ -25,7 +25,7 @@ namespace TermProjectX.Controllers
         }
 
         // GET: ThreatLevel/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -65,7 +65,7 @@ namespace TermProjectX.Controllers
         }
 
         // GET: ThreatLevel/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -85,7 +85,7 @@ namespace TermProjectX.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("ThreatLevelId,Name")] ThreatLevel threatLevel)
+        public async Task<IActionResult> Edit(int id, [Bind("ThreatLevelId,Name")] ThreatLevel threatLevel)
         {
             if (id != threatLevel.ThreatLevelId)
             {
@@ -116,7 +116,7 @@ namespace TermProjectX.Controllers
         }
 
         // GET: ThreatLevel/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -136,7 +136,7 @@ namespace TermProjectX.Controllers
         // POST: ThreatLevel/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var threatLevel = await _context.ThreatLevels.FindAsync(id);
             _context.ThreatLevels.Remove(threatLevel);
@@ -144,7 +144,7 @@ namespace TermProjectX.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ThreatLevelExists(string id)
+        private bool ThreatLevelExists(int id)
         {
             return _context.ThreatLevels.Any(e => e.ThreatLevelId == id);
         }

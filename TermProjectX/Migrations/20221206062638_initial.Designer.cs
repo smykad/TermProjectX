@@ -9,21 +9,23 @@ using TermProjectX.Models;
 namespace TermProjectX.Migrations
 {
     [DbContext(typeof(SCPContext))]
-    [Migration("20221204070310_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221206062638_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.30")
+                .HasAnnotation("ProductVersion", "3.1.31")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("TermProjectX.Models.ObjectClass", b =>
                 {
-                    b.Property<string>("ObjectClassId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ObjectClassId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -36,12 +38,12 @@ namespace TermProjectX.Migrations
                     b.HasData(
                         new
                         {
-                            ObjectClassId = "S",
+                            ObjectClassId = -1,
                             Name = "Safe"
                         },
                         new
                         {
-                            ObjectClassId = "E",
+                            ObjectClassId = -2,
                             Name = "Euclid"
                         });
                 });
@@ -68,11 +70,11 @@ namespace TermProjectX.Migrations
                         .HasColumnType("nvarchar(60)")
                         .HasMaxLength(60);
 
-                    b.Property<string>("ObjectClassID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ObjectClassID")
+                        .HasColumnType("int");
 
-                    b.Property<string>("ThreatLevelID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ThreatLevelID")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -89,8 +91,8 @@ namespace TermProjectX.Migrations
                             Containment = "Standard human containment cell",
                             Description = "SCP-5881 refers to Ben Hennessy, a 26 year old British male, who subconsciously manifests three Class 2 incorporeal entities that resemble different versions of himself. These instances manifest around SCP-5881 and converse with him for any amount of time between 2 minutes to 5 hours. These conversations involve SCP-5881 being instructed on a variety of subjects, including mathematics, computer science, ancient and modern history, science, physical education and various life and social skills. SCP-5881 manifestations previously occurred a minimum of once every two hours, and a maximum of once every three days. Only one instance can manifest at a time.",
                             Name = "SCP-5581",
-                            ObjectClassID = "E",
-                            ThreatLevelID = "G"
+                            ObjectClassID = -1,
+                            ThreatLevelID = -1
                         },
                         new
                         {
@@ -98,8 +100,8 @@ namespace TermProjectX.Migrations
                             Containment = "Wooden Pigeon Coop",
                             Description = "Roughly 39cm in length and 34cm in height. Despite lacking the proper bodily structures for human speech, SCP-6567 is a proficient speaker of both the English and Italian languages. SCP-6567 refers to itself as 'Eduardo Uccello, ' a self proclaimed, former Italian-American mafia underboss. Despite inhibiting the entity's ability to fly, the entity always adorns a pigeon tailored Armani blue-gray striped suit and tie as well as a dark gray fedora while outside of its enclosure. When asked how it acquired such apparel, SCP-6567 explained that it was,  'A gift from some of my subordinates. '",
                             Name = "SCP-6567",
-                            ObjectClassID = "S",
-                            ThreatLevelID = "B"
+                            ObjectClassID = -2,
+                            ThreatLevelID = -2
                         },
                         new
                         {
@@ -107,8 +109,8 @@ namespace TermProjectX.Migrations
                             Containment = "Fencing",
                             Description = "SCP-1271 is a square tract of land approximately 20 m on each side, roughly landscaped into a functional kickball field. The field comprised a portion of the grounds of Sheckler Elementary School in Catasauqua, PA, before the school was closed in 1967. The grounds have been abandoned ever since.",
                             Name = "SPC-1271",
-                            ObjectClassID = "E",
-                            ThreatLevelID = "G"
+                            ObjectClassID = -1,
+                            ThreatLevelID = -1
                         },
                         new
                         {
@@ -116,15 +118,17 @@ namespace TermProjectX.Migrations
                             Containment = "Cryo-containment Facility",
                             Description = "SCP-189 is a species of parasitic roundworm (tentative taxonomic classification [DATA EXPUNGED]) capable of infesting any mammalian life form. Infection most commonly occurs as a result of direct skin contact with one or more egg sacs. These egg sacs are covered with microscopic \"hooks\" similar to those on the cuticles of some species of nematode, which anchor the sacs to the skin's surface. Contact with sebum then prompts the eggs inside to hatch, at which time the larvae seek out and burrow into one or more nearby hair follicles.",
                             Name = "SCP-189",
-                            ObjectClassID = "S",
-                            ThreatLevelID = "B"
+                            ObjectClassID = -2,
+                            ThreatLevelID = -2
                         });
                 });
 
             modelBuilder.Entity("TermProjectX.Models.ThreatLevel", b =>
                 {
-                    b.Property<string>("ThreatLevelId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ThreatLevelId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -137,12 +141,12 @@ namespace TermProjectX.Migrations
                     b.HasData(
                         new
                         {
-                            ThreatLevelId = "G",
+                            ThreatLevelId = -1,
                             Name = "Green"
                         },
                         new
                         {
-                            ThreatLevelId = "B",
+                            ThreatLevelId = -2,
                             Name = "Blue"
                         });
                 });
@@ -151,11 +155,15 @@ namespace TermProjectX.Migrations
                 {
                     b.HasOne("TermProjectX.Models.ObjectClass", "ObjectClass")
                         .WithMany()
-                        .HasForeignKey("ObjectClassID");
+                        .HasForeignKey("ObjectClassID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("TermProjectX.Models.ThreatLevel", "ThreatLevel")
                         .WithMany()
-                        .HasForeignKey("ThreatLevelID");
+                        .HasForeignKey("ThreatLevelID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

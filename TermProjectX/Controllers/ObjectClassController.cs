@@ -25,7 +25,7 @@ namespace TermProjectX.Controllers
         }
 
         // GET: ObjectClass/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -65,7 +65,7 @@ namespace TermProjectX.Controllers
         }
 
         // GET: ObjectClass/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -85,7 +85,7 @@ namespace TermProjectX.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("ObjectClassId,Name")] ObjectClass objectClass)
+        public async Task<IActionResult> Edit(int id, [Bind("ObjectClassId,Name")] ObjectClass objectClass)
         {
             if (id != objectClass.ObjectClassId)
             {
@@ -116,7 +116,7 @@ namespace TermProjectX.Controllers
         }
 
         // GET: ObjectClass/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -136,7 +136,7 @@ namespace TermProjectX.Controllers
         // POST: ObjectClass/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var objectClass = await _context.ObjectClasses.FindAsync(id);
             _context.ObjectClasses.Remove(objectClass);
@@ -144,7 +144,7 @@ namespace TermProjectX.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ObjectClassExists(string id)
+        private bool ObjectClassExists(int id)
         {
             return _context.ObjectClasses.Any(e => e.ObjectClassId == id);
         }

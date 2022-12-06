@@ -6,19 +6,21 @@ namespace TermProjectX.Models
     {
         public SCPContext(DbContextOptions<SCPContext> options) : base(options) { }
         public DbSet<SCP> SCPs { get; set; }
-        public DbSet<ObjectClass> ObjectClasses{ get; set;}
-        public DbSet<ThreatLevel> ThreatLevels { get; set;}
+        public DbSet<ObjectClass> ObjectClasses { get; set; }
+        public DbSet<ThreatLevel> ThreatLevels { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+
             modelBuilder.Entity<ThreatLevel>().HasData(
-                new ThreatLevel { ThreatLevelId = "G", Name = "Green" },
-                new ThreatLevel { ThreatLevelId = "B", Name = "Blue" }
+                new ThreatLevel { ThreatLevelId = -1, Name = "Green" },
+                new ThreatLevel { ThreatLevelId = -2, Name = "Blue" }
 
             );
             modelBuilder.Entity<ObjectClass>().HasData(
-                new ObjectClass { ObjectClassId = "S", Name = "Safe" },
-                new ObjectClass { ObjectClassId = "E", Name = "Euclid" }
+                new ObjectClass { ObjectClassId = -1, Name = "Safe" },
+                new ObjectClass { ObjectClassId = -2, Name = "Euclid" }
 
             );
             modelBuilder.Entity<SCP>().HasData(
@@ -34,8 +36,8 @@ namespace TermProjectX.Models
                         "manifestations previously occurred a minimum of once every two hours, and a maximum of once every three days. " +
                         "Only one instance can manifest at a time.",
                     Containment = "Standard human containment cell",
-                    ObjectClassID = "E",
-                    ThreatLevelID = "G"
+                    ObjectClassID = -1,
+                    ThreatLevelID = -1
                 },
                 new SCP
                 {
@@ -49,8 +51,8 @@ namespace TermProjectX.Models
                         "fedora while outside of its enclosure. When asked how it acquired such apparel, SCP-6567 explained that " +
                         "it was,  'A gift from some of my subordinates. '",
                     Containment = "Wooden Pigeon Coop",
-                    ObjectClassID = "S",
-                    ThreatLevelID = "B"
+                    ObjectClassID = -2,
+                    ThreatLevelID = -2
                 },
                 new SCP
                 {
@@ -60,8 +62,9 @@ namespace TermProjectX.Models
                         "functional kickball field. The field comprised a portion of the grounds of Sheckler Elementary School in " +
                         "Catasauqua, PA, before the school was closed in 1967. The grounds have been abandoned ever since.",
                     Containment = "Fencing",
-                    ObjectClassID = "E",
-                    ThreatLevelID = "G"
+                    ObjectClassID = -1,
+                    ThreatLevelID = -1
+
                 },
                 new SCP
                 {
@@ -74,8 +77,8 @@ namespace TermProjectX.Models
                         "of some species of nematode, which anchor the sacs to the skin's surface. Contact with sebum then prompts the eggs " +
                         "inside to hatch, at which time the larvae seek out and burrow into one or more nearby hair follicles.",
                     Containment = "Cryo-containment Facility",
-                    ObjectClassID = "S",
-                    ThreatLevelID = "B"
+                    ObjectClassID = -2,
+                    ThreatLevelID = -2
                 }
 
             );

@@ -24,14 +24,11 @@ namespace TermProjectX.Models
         public string Containment { get; set; }
 
         [ForeignKey("ObjectClassID")]
-        public string ObjectClassID { get; set; }
+        public int ObjectClassID { get; set; }
 
-        [Display(Name="Object Class")]
         public ObjectClass ObjectClass { get; set; }
         [ForeignKey("ThreatLevelID")]
-        public string ThreatLevelID { get; set; }
-
-        [Display(Name = "Threat Level")]
+        public int ThreatLevelID { get; set; }
         public ThreatLevel ThreatLevel { get; set; }
 
     }
