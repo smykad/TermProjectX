@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +26,7 @@ namespace TermProjectX.Controllers
         //    var sCPContext = _context.SCPs.Include(s => s.ObjectClass).Include(s => s.ThreatLevel);
         //    return View(await sCPContext.ToListAsync());
         //}
-
+        [AllowAnonymous]
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
             ViewData["CurrentSort"] = sortOrder;
@@ -66,6 +68,7 @@ namespace TermProjectX.Controllers
 
 
         // GET: SCP/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -86,6 +89,7 @@ namespace TermProjectX.Controllers
         }
 
         // GET: SCP/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["ObjectClassID"] = new SelectList(_context.ObjectClasses, "ObjectClassId", "Name");
@@ -98,6 +102,7 @@ namespace TermProjectX.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Create([Bind("ID,Name,Description,Containment,ObjectClassID,ThreatLevelID")] SCP sCP)
         {
             if (ModelState.IsValid)
@@ -112,6 +117,7 @@ namespace TermProjectX.Controllers
         }
 
         // GET: SCP/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -167,6 +173,7 @@ namespace TermProjectX.Controllers
         }
 
         // GET: SCP/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
