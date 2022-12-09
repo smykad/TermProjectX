@@ -22,16 +22,17 @@
         <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
 
             @*CARD HEADER*@
-            <div class="card-header text-center">@Html.DisplayFor(modelItem => item.Name)</div>
+            <div class="card-header text-center"><a asp-action="Details" asp-route-id="@item.ObjectClassId"
+                class="text-white">@Html.DisplayFor(modelItem => item.Name)</a></div>
 
             @*CARD BODY*@
             <div class="card-body bg-dark">
 
                 @*CARD BUTTONS*@
                 <div class="form-group justify-content-center">
-                    <a asp-action="Edit" asp-route-id="@item.ObjectClassId" class="btn btn-primary">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.ObjectClassId" class="btn btn-primary">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.ObjectClassId" class="btn btn-primary">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.ObjectClassId" class="btn btn-success">Edit</a>
+
+                    <a asp-action="Delete" asp-route-id="@item.ObjectClassId" class="btn btn-danger">Delete</a>
                 </div>
             </div>
         </div>

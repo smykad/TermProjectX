@@ -4,47 +4,59 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<div class="card-deck justify-content-center">
+<div class="card bg-info" style="max-width: 38rem;">
 
-<h4>SCP</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+    <div class="card-body bg-dark">
+        <div class="card-header bg-info text-center">
+            Report an SCP
+        </div>
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @*Name*@
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+
+            @*Threat Level*@
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="ThreatLevelID" class="control-label"></label>
+                <select asp-for="ThreatLevelID" class="form-control" asp-items="ViewBag.ThreatLevelID"></select>
             </div>
+            
+            @*Object Class*@
+            <div class="form-group">
+                <label asp-for="ObjectClassID" class="control-label"></label>
+                <select asp-for="ObjectClassID" class ="form-control" asp-items="ViewBag.ObjectClassID"></select>
+            </div>
+            
+            @*Containment*@
             <div class="form-group">
                 <label asp-for="Containment" class="control-label"></label>
                 <input asp-for="Containment" class="form-control" />
                 <span asp-validation-for="Containment" class="text-danger"></span>
             </div>
+
+            @*Description*@
             <div class="form-group">
-                <label asp-for="ObjectClassID" class="control-label"></label>
-                <select asp-for="ObjectClassID" class ="form-control" asp-items="ViewBag.ObjectClassID"></select>
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="6"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ThreatLevelID" class="control-label"></label>
-                <select asp-for="ThreatLevelID" class ="form-control" asp-items="ViewBag.ThreatLevelID"></select>
-            </div>
+
+            @*Buttons*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-success">Back</a>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

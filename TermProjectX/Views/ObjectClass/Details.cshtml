@@ -3,25 +3,19 @@
 @{
     ViewData["Title"] = "Details";
 }
-<h1 class="text-center">@Html.DisplayNameFor(model => model): Details</h1>
-
-
-<br />
-<br />
-
 <div class="card-deck justify-content-center">
     @*CARD*@
-    <div class="card" style="max-width: 18rem;">
+    <div class="card" style="max-width: 58rem;">
 
         @*CARD HEADER*@
-        <div class="card-header bg-info">
-            @Html.DisplayNameFor(model => model) @Html.DisplayNameFor(model => model.Name)
+        <div class="card-header bg-info text-center">
+            @Html.DisplayNameFor(model => model) @Html.DisplayFor(model => model.Name)
         </div>
         @*CARD BODY*@
         <div class="card-body bg-dark">
 
             @*CARD TITLE*@
-            <h5 class="card-title">@Html.DisplayFor(model => model.Name)</h5>
+            <h6 class="card-subtitle">@Html.DisplayFor(model => model.Description)</h6>
 
             @*BUTTONS*@
             <br />

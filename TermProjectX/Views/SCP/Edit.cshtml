@@ -3,52 +3,68 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
-<h1>Edit</h1>
-
-<h4>SCP</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="card-deck justify-content-center">
+<div class="card bg-info" style="max-width: 38rem;">
+    
+    <div class="card-body bg-dark">
+        <div class="card-header bg-info text-center">
+            Edit
+        </div>
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
+            
+                    @*Name*@
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Containment" class="control-label"></label>
-                <input asp-for="Containment" class="form-control" />
-                <span asp-validation-for="Containment" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ObjectClassID" class="control-label"></label>
-                <select asp-for="ObjectClassID" class="form-control" asp-items="ViewBag.ObjectClassID"></select>
-                <span asp-validation-for="ObjectClassID" class="text-danger"></span>
-            </div>
+
+            @*ThreatLevel*@
             <div class="form-group">
                 <label asp-for="ThreatLevelID" class="control-label"></label>
                 <select asp-for="ThreatLevelID" class="form-control" asp-items="ViewBag.ThreatLevelID"></select>
                 <span asp-validation-for="ThreatLevelID" class="text-danger"></span>
             </div>
+
+            @*ObjectClass*@
+            <div class="form-group">
+                <label asp-for="ObjectClassID" class="control-label"></label>
+                <select asp-for="ObjectClassID" class="form-control" asp-items="ViewBag.ObjectClassID"></select>
+                <span asp-validation-for="ObjectClassID" class="text-danger"></span>
+            </div>
+
+            @*Containment*@
+            <div class="form-group">
+                <label asp-for="Containment" class="control-label"></label>
+                <input asp-for="Containment" class="form-control" />
+                <span asp-validation-for="Containment" class="text-danger"></span>
+            </div>
+       
+           
+
+            
+            @*Description*@
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows=10></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+          
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index"class="btn btn-success">Back</a>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    
 </div>
-
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

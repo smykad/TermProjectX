@@ -14,13 +14,13 @@ namespace TermProjectX.Models
 
 
             modelBuilder.Entity<ThreatLevel>().HasData(
-                new ThreatLevel { ThreatLevelId = -1, Name = "Green" },
-                new ThreatLevel { ThreatLevelId = -2, Name = "Blue" }
+                new ThreatLevel { ThreatLevelId = -1, Name = "Green", Description = "The object is not beneficial, but isn't harmful as long as it is handled correctly. Often assigned to Safe and Euclid class objects." },
+                new ThreatLevel { ThreatLevelId = -2, Name = "Blue", Description = "The object might be beneficial, but its mechanisms are poorly understood or remain unknown. This applies to items with undefined properties or to entities that react differently to different individuals. Often assigned to Safe and Euclid class objects." }
 
             );
             modelBuilder.Entity<ObjectClass>().HasData(
-                new ObjectClass { ObjectClassId = -1, Name = "Safe" },
-                new ObjectClass { ObjectClassId = -2, Name = "Euclid" }
+                new ObjectClass { ObjectClassId = -1, Name = "Safe", Description = "Safe-class SCPs are anomalies that are easily and safely contained. This is often due to the fact that the Foundation has researched the SCP well enough that containment does not require significant resources or that the anomalies require a specific and conscious activation or trigger. Classifying an SCP as Safe, however, does not mean that handling or activating it does not pose a threat." },
+                new ObjectClass { ObjectClassId = -2, Name = "Euclid", Description = "Euclid-class SCPs are anomalies that require more resources to contain completely or where containment isn't always reliable. Usually this is because the SCP is insufficiently understood or inherently unpredictable. Euclid is the Object Class with the greatest scope, and it's usually a safe bet that an SCP will be this class if it doesn't easily fall into any of the other standard Object Classes." }
 
             );
             modelBuilder.Entity<SCP>().HasData(

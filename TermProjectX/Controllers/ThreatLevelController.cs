@@ -53,7 +53,7 @@ namespace TermProjectX.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ThreatLevelId,Name")] ThreatLevel threatLevel)
+        public async Task<IActionResult> Create([Bind("ThreatLevelId,Name,Description")] ThreatLevel threatLevel)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace TermProjectX.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ThreatLevelId,Name")] ThreatLevel threatLevel)
+        public async Task<IActionResult> Edit(int id, [Bind("ThreatLevelId,Name,Description")] ThreatLevel threatLevel)
         {
             if (id != threatLevel.ThreatLevelId)
             {

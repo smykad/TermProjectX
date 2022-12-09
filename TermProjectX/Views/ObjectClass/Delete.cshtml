@@ -3,14 +3,10 @@
 @{
     ViewData["Title"] = "Delete";
 }
-<h1 class="text-center">@Html.DisplayNameFor(model => model): Delete</h1>
 
-
-<br />
-<br />
 <div class="card-deck justify-content-center">
     @*CARD*@
-    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+    <div class="card text-white bg-danger mb-3" style="max-width: 25rem;">
 
         @*Card Header*@
         <div class="card-header">
@@ -25,7 +21,7 @@
         <div class="card-body bg-dark">
 
             @*CARD TITLE*@
-            <h5 class="card-title">Are you sure you want to delete the <br />@Html.DisplayNameFor(model => model): @Html.DisplayFor(model => model.Name)?</h5>
+            <h5 class="card-title">Are you sure you want to delete: @Html.DisplayFor(model => model.Name)?</h5>
 
             @*CARD BUTTONS*@
             <br />

@@ -7,12 +7,16 @@ namespace TermProjectX.Models
     public class ObjectClass
     {
         [Key]
-      
+
         public int ObjectClassId { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
         [RegularExpression("^[a-zA-Z]*$", ErrorMessage = "Only alphabetic letters are allowed.")]
-    
+
         public string Name { get; set; }
+
+        [StringLength(1500)]
+        [Required(ErrorMessage = "Must include a Description")]
+        public string Description { get; set; }
     }
 }

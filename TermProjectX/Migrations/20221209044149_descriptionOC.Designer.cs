@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TermProjectX.Models;
 
 namespace TermProjectX.Migrations
 {
     [DbContext(typeof(SCPContext))]
-    partial class SCPContextModelSnapshot : ModelSnapshot
+    [Migration("20221209044149_descriptionOC")]
+    partial class descriptionOC
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,11 +137,6 @@ namespace TermProjectX.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1500)")
-                        .HasMaxLength(1500);
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -152,13 +149,11 @@ namespace TermProjectX.Migrations
                         new
                         {
                             ThreatLevelId = -1,
-                            Description = "The object is not beneficial, but isn't harmful as long as it is handled correctly. Often assigned to Safe and Euclid class objects.",
                             Name = "Green"
                         },
                         new
                         {
                             ThreatLevelId = -2,
-                            Description = "The object might be beneficial, but its mechanisms are poorly understood or remain unknown. This applies to items with undefined properties or to entities that react differently to different individuals. Often assigned to Safe and Euclid class objects.",
                             Name = "Blue"
                         });
                 });

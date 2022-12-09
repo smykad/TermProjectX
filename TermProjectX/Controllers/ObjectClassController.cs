@@ -53,7 +53,7 @@ namespace TermProjectX.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ObjectClassId,Name")] ObjectClass objectClass)
+        public async Task<IActionResult> Create([Bind("ObjectClassId,Name,Description")] ObjectClass objectClass)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace TermProjectX.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ObjectClassId,Name")] ObjectClass objectClass)
+        public async Task<IActionResult> Edit(int id, [Bind("ObjectClassId,Name,Description")] ObjectClass objectClass)
         {
             if (id != objectClass.ObjectClassId)
             {

@@ -1,13 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Contact";
 }
-<div class="row">
-    <div class="col-sm-8">
+<div class="card-deck justify-content-center">
+<div class="card bg-dark">
+    <div class="card-header bg-info">
         <h2>SCP</h2>
         <h3>Secure, Contain, Protect</h3>
+    </div>
+
+    <div class="card-body">
+    <div class="row">
+    <div class="col-sm-8">
         <address class="row">
-            <i class="fa fa-comments-o col-sm-2" style="font-size:450%;color:#ffffff"></i>
-            <div class="col-sm-8 text-white">
+            <i class="fa fa-comments-o col-sm-2" style="font-size:400%;color:#ffffff"></i>
+            <div class="col-sm-6 text-white">
                 123 Secure Ave<br />
                 Contain City, MI 49696<br />
                 <abbr title="Phone">P:</abbr>
@@ -16,12 +22,17 @@
         </address>
     </div>
     <img src="~/Images/scp.png" alt="SCP logo" class="img-fluid col-sm-4" />
-
-    <div class="col-sm-12 mt-5 list-group list-group-horizontal" style="opacity:100%;">
-        <a href="mailto:us@info.scp.org" class="list-group-item list-group-item-action list-group-item-success">United States:<br /> us@info.scp.org</a>
-        <a href="mailto:europe@info.scp.org" class="list-group-item list-group-item-action list-group-item-success">Europe:<br /> europe@info.scp.org</a>
-        <a href="mailto:africa@info.scp.org" class="list-group-item list-group-item-action list-group-item-success">Africa:<br /> africa@info.scp.org</a>
-        <a href="mailto:austrailia@info.scp.org" class="list-group-item list-group-item-action list-group-item-success">Austrailia:<br /> australia@info.scp.org</a>
     </div>
+    @*Card Footer*@
+    <div class="card-footer">
+        <div class="col-sm-12 mt-5 list-group list-group-horizontal" style="opacity:100%;">
+            <a href="mailto:us@info.scp.org" class="list-group-item list-group-item-action list-group-item-info">United States:<br /> us@info.scp.org</a>
+            <a href="mailto:europe@info.scp.org" class="list-group-item list-group-item-action list-group-item-info">Europe:<br /> europe@info.scp.org</a>
+            <a href="mailto:africa@info.scp.org" class="list-group-item list-group-item-action list-group-item-info">Africa:<br /> africa@info.scp.org</a>
+            <a href="mailto:austrailia@info.scp.org" class="list-group-item list-group-item-action list-group-item-info">Austrailia:<br /> australia@info.scp.org</a>
+        </div>
+    </div>
+</div>
+</div>
 </div>
 
